@@ -26,8 +26,8 @@ function App() {
       const awayGoals = (hash * 13) % 6;
       const totalGoals = homeGoals + awayGoals;
       
-      // Determine even/odd
-      const isEven = totalGoals % 2 === 0;
+      // OR gate logic: if either homeGoals or awayGoals is odd, result is Odd; only if both are even, result is Even
+      const isEven = (homeGoals % 2 === 0) && (awayGoals % 2 === 0);
       
       // Calculate confidence (45-65% range for realism)
       const confidence = 45 + (hash % 21);
@@ -56,6 +56,9 @@ function App() {
       } else {
         factors.push("Expected to be a balanced, tactical encounter");
       }
+      
+      // Update factors to mention OR gate logic
+      factors.push(`Even/Odd is determined by an OR gate: if either score is odd, result is Odd; only if both are even, result is Even.`);
       
       setPrediction({
         result: isEven ? "Even" : "Odd",
